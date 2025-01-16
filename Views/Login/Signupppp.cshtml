@@ -1,0 +1,234 @@
+﻿ @* @model yodago.Models.Userinfo *@
+@*
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Register Here</h2>
+        <form asp-action="Signup" method="post" enctype="multipart/form-data">
+            <validation-summary modelonly="true" class="text-danger"></validation-summary>
+
+            <div>
+                <label for="Fullname">Full Name</label>
+                <input type="text" asp-for="Fullname" id="Fullname" placeholder="Enter your full name" required />
+                <span asp-validation-for="Fullname" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="Username">User Name</label>
+                <input type="text" asp-for="Username" id="Username" placeholder="Enter your username" required />
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="Email">Email</label>
+                <input type="email" asp-for="Email" id="Email" placeholder="Enter your email" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="Phone">Phone Number</label>
+                <input type="tel" asp-for="Phone" id="Phone" placeholder="Enter your phone number" required />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="Dateofbirth">Date of Birth</label>
+                <input type="date" asp-for="Dateofbirth" id="Dateofbirth" required />
+                <span asp-validation-for="Dateofbirth" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="Address">Address</label>
+                <input type="text" asp-for="Address" id="Address" placeholder="Enter your address" required />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <div>
+                <label for="Password">Password</label>
+                <input type="password" asp-for="Password" id="Password" placeholder="Enter your password" required />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+@* 
+            <div>
+                <label asp-for="Profilepicture">Profile Picture</label>
+                <input asp-for="Profilepicture" type="file" />
+                <span asp-validation-for="Profilepicture" class="text-danger"></span>
+            </div> 
+
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+</body>
+</html> *@
+@* 
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f3f3f3;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .container {
+        background-color: #fff;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        padding: 20px;
+        width: 300px;
+    }
+
+        .container h2 {
+            color: #4caf50;
+            margin-bottom: 20px;
+        }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: #555;
+        font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="tel"],
+    input[type="file"],
+    select {
+        width: 100%;
+        margin-bottom: 15px;
+        padding: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+    }
+
+    button[type="submit"] {
+        padding: 15px;
+        border-radius: 10px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        cursor: pointer;
+        width: 100%;
+        font-size: 16px;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #4caf50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+    }
+</style>
+  *@@* @* 
+@model yodago.Models.Userinfo
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Sign Up Form by Colorlib</title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="~/LoginAndRegister/fonts/material-icon/css/material-design-iconic-font.min.css">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="~/LoginAndRegister/css/style.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="main">
+        <!-- Sign up form -->
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form asp-action="Signup" method="POST" class="register-form" id="register-form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="Fullname"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Fullname" type="text" placeholder="Full Name" />
+                                <span asp-validation-for="Fullname" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Email"><i class="zmdi zmdi-email"></i></label>
+                                <input asp-for="Email" type="email" id="email" placeholder="Email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input asp-for="Username" type="text" placeholder="Username" />
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Phone"><i class="zmdi zmdi-phone"></i></label>
+                                <input asp-for="Phone" type="tel" id="Phone" placeholder="Phone Number" />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Dateofbirth"><i class="zmdi zmdi-calendar"></i></label>
+                                <input asp-for="Dateofbirth" type="date" id="Dateofbirth" />
+                                <span asp-validation-for="Dateofbirth" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Address"><i class="zmdi zmdi-pin"></i></label>
+                                <input asp-for="Address" type="text" id="Address" placeholder="Address" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="Password"><i class="zmdi zmdi-lock"></i></label>
+                                <input asp-for="Password" type="password" placeholder="Password" />
+                                <span asp-validation-for="Password" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label for="ConfirmPassword"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="ConfirmPassword" placeholder="Confirm Password" />
+                            </div>
+                            <div class="form-group">
+                                <label for="Profilepicture"><i class="zmdi zmdi-image"></i></label>
+                                <input asp-for="Profilepicture" type="file" />
+                                <span asp-validation-for="Profilepicture" class="text-danger"></span>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register" />
+                            </div>
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="~/LoginAndRegister/images/signup-image.jpg" alt="sign up image"></figure>
+                        <a asp-action="Login" class="signup-image-link">I am already a member</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- JS -->
+    <script src="~/LoginAndRegister/vendor/jquery/jquery.min.js"></script>
+    <script src="~/LoginAndRegister/js/main.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> *@

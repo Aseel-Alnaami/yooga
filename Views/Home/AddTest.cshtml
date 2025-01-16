@@ -1,0 +1,138 @@
+﻿@model yogago.Models.Testimonial
+
+@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Testimonial</h2>
+            </div>
+            <div class="col-12">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Testimonial Form Start -->
+<div class="contact">
+    <div class="container">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>We’d love your feedback! Your opinion will be reviewed by the admin before being uploaded to the site. Thank you!</p>
+        </div>
+
+        <div class="row">
+            <div class="col-12 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="contact-form">
+                    <form asp-action="AddTest" method="post" id="testimonialForm">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <!-- Content Field -->
+                        <div class="control-group">
+                            <textarea asp-for="Content" class="form-control" placeholder="Your Feedback"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+
+                        <!-- Rating -->
+                        <div class="control-group rating-container">
+                            <h4>Rate our program:</h4>
+                            <div class="stars">
+                                @for (var i = 1; i <= 5; i++)
+                                {
+                                    <span class="star" data-value="@i">&#9733;</span>
+                                }
+                            </div>
+                            <input type="hidden" asp-for="Rating" id="rating" />
+                            <p id="rating-value" class="text-muted">Your Rating: 0</p>
+                            <span asp-validation-for="Rating" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div>
+                            <button type="submit" class="btn btn-primary">Submit Testimonial</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial Form End -->
+<!-- Styles -->
+<style>
+    .rating-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .stars {
+        display: inline-flex;
+        cursor: pointer;
+    }
+
+    .star {
+        font-size: 2rem;
+        color: #ccc;
+        transition: color 0.2s;
+    }
+
+        .star:hover,
+        .star.selected,
+        .star:hover ~ .star {
+            color: #ffcc00;
+        }
+
+    #rating-value {
+        margin-top: 10px;
+        font-size: 1.2rem;
+        color: #555;
+    }
+</style>
+
+<!-- JavaScript -->
+<script>
+    const stars = document.querySelectorAll('.star');
+    const ratingValueDisplay = document.getElementById('rating-value');
+    const ratingInput = document.getElementById('rating');
+    let selectedRating = 0;
+
+    // Add event listeners to each star
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => highlightStars(star.dataset.value));
+        star.addEventListener('mouseout', resetStars);
+        star.addEventListener('click', () => setRating(star.dataset.value));
+    });
+
+    // Highlight stars up to the hovered one
+    function highlightStars(rating) {
+        stars.forEach(star => {
+            if (star.dataset.value <= rating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    }
+
+    // Reset stars to reflect the selected rating
+    function resetStars() {
+        stars.forEach(star => {
+            if (star.dataset.value <= selectedRating) {
+                star.classList.add('selected');
+            } else {
+                star.classList.remove('selected');
+            }
+        });
+    }
+
+    // Set the rating and update the display
+    function setRating(rating) {
+        selectedRating = rating;
+        ratingValueDisplay.textContent = `Your Rating: ${selectedRating}`;
+        ratingInput.value = selectedRating; // Set the hidden input's value
+    }
+</script>

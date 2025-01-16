@@ -1,0 +1,68 @@
+﻿@model yogago.Models.Class
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Class</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Classname" class="control-label"></label>
+                <input asp-for="Classname" class="form-control" />
+                <span asp-validation-for="Classname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Classdays" class="control-label"></label>
+                <input asp-for="Classdays" class="form-control" />
+                <span asp-validation-for="Classdays" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Classtime" class="control-label"></label>
+                <input asp-for="Classtime" class="form-control" />
+                <span asp-validation-for="Classtime" class="text-danger"></span>
+            </div>
+           @*  <div class="form-group">
+                <label asp-for="Imgcover" class="control-label"></label>
+                <input asp-for="Imgcover" class="form-control" />
+                <span asp-validation-for="Imgcover" class="text-danger"></span>
+            </div> *@
+
+            <div class="form-group">
+                <label for="imgFile" class="control-label">Class Image</label>
+                <input type="file" name="imgFile" class="form-control" />
+                <br />
+                @* <img src="@Url.Content("~/classcover" + Model.Imgcover)" alt="Class Image" style="width:300px; height:auto;" /> *@
+
+            </div>
+
+           <div class="form-group">
+    <label asp-for="Categoryid" class="control-label"></label>
+                <select asp-for="Categoryid" class="form-control" asp-items="@(ViewData["Categoryid"] as SelectList)">
+        <option value="" disabled selected>Select a category</option>
+    </select>
+    <span asp-validation-for="Categoryid" class="text-danger"></span>
+</div>
+            <div class="form-group">
+                <input type="hidden" asp-for="Trainerid" value="@ViewBag.Trainerid" />
+
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

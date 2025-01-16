@@ -1,0 +1,128 @@
+﻿ @model yogago.Models.Loginview
+
+
+@{
+	Layout = null;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="~/login/css.css">
+</head>
+<body>
+
+
+<h1>YogaGO</h1>
+<div class="container" id="container">
+		
+		<div class="form-container sign-in-container">
+			 <form asp-action="Login" method="POST">
+        @Html.AntiForgeryToken()
+
+        <h1>Sign in</h1>
+
+        <!-- Username Input -->
+        <input type="text" asp-for="Username" placeholder="User Name" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+
+        <!-- Password Input -->
+        <input type="password" asp-for="Password" placeholder="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <!-- Validation Summary -->
+        <div class="text-danger">
+            @Html.ValidationSummary()
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Sign In</button>
+    </form>
+		</div>
+	<div class="overlay-container">
+		<div class="overlay">
+			<div class="overlay-panel overlay-left">
+				<h1>Welcome Back!</h1>
+				<p>To keep connected with us please login with your personal info</p>
+				<button class="ghost" id="signIn">Sign In</button>
+			</div>
+			<div class="overlay-panel overlay-right">
+				<h1>Hello, Friend!</h1>
+				<p>Enter your personal details and start journey with us</p>
+					<button class="ghost" id="signUp" > <a asp-action="Signup">Sign Up </a></button>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+<footer>
+	
+
+
+	<script  src="~/login/js.js"> </script>
+</footer>
+</html> 
+
+@* 
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/login/css.css">
+</head>
+<body>
+    <h1>YogaGO</h1>
+    <div class="container" id="container">
+        <div class="form-container sign-in-container">
+
+<div class="form-container sign-in-container">
+    <form asp-action="Login" method="POST">
+        @Html.AntiForgeryToken()
+
+        <h1>Sign in</h1>
+
+        <!-- Username Input -->
+        <input type="text" asp-for="Username" placeholder="User Name" />
+        <span asp-validation-for="Username" class="text-danger"></span>
+
+        <!-- Password Input -->
+        <input type="password" asp-for="Password" placeholder="Password" />
+        <span asp-validation-for="Password" class="text-danger"></span>
+
+        <!-- Validation Summary -->
+        <div class="text-danger">
+            @Html.ValidationSummary()
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit">Sign In</button>
+    </form>
+</div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Welcome Back!</h1>
+                    <p>To keep connected with us please login with your personal info</p>
+                    <button class="ghost" id="signIn">Sign In</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Hello, Friend!</h1>
+                    <p>Enter your personal details and start your journey with us</p>
+                    <button class="ghost" id="signUp">
+                        <a asp-action="Signup">Sign Up</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer>
+    <script src="~/login/js.js"></script>
+</footer>
+</html>
+*@

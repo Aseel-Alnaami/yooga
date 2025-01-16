@@ -1,0 +1,99 @@
+﻿@model yogago.Models.Userinfo
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Userinfo</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Fullname)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Fullname)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Username)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Username)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dateofbirth)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dateofbirth)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Profilepicture)
+        </dt>
+        <dd class="col-sm-10">
+            @* @Html.DisplayFor(model => model.Profilepicture) *@
+
+            @if (!string.IsNullOrEmpty(Model.Profilepicture))
+            {
+                <img src="@Model.Profilepicture" alt="Profile picture of @Model.Fullname" class="profile-picture" />
+            }
+            else
+            {
+                <img src="/path/to/placeholder.jpg" alt="Default Profile Picture" class="profile-picture" />
+            }
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Dateadded)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Dateadded)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Role)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Role.Rolename)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Userid">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
+<style>
+
+
+
+    .profile-picture {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%; /* Optional for rounded images */
+    }
+
+</style>

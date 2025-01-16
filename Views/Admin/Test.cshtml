@@ -1,0 +1,136 @@
+﻿@model IEnumerable<yogago.Models.TestInfo>
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+
+
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <div class="row">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-primary text-white me-2">
+                        <i class="badge badge-gradient-warning"></i>
+                    </span> Approve or Reject Testimonials
+                </h3>
+            </div>
+        </div>
+
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Recent Testamoneal</h4>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+
+                                        <th>Profile Picture</th>
+                                     <th>Full Name</th>
+                                      <th>Testimonial</th>
+                                      <th>Rating</th>
+									<th>Date</th>
+                                    <th>  pen   </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                    @foreach (var item in Model.Where(t => t.Test.Status == "Pending"))
+                                    {
+                            <tr>
+                                <td>
+                                         <img src="@item.Userinfo.Profilepicture" alt="Profile Picture" class="me-2" /> 
+                                </td>
+                                            <td>@item.Userinfo.Fullname</td>
+                                 @* <td>
+                                     <label class="badge badge-gradient-success">DONE</label>
+                                 </td> *@
+                                            <td>@item.Test.Content</td>
+                                            <td>@item.Test.Rating</td>
+                                            <td>@item.Test.Submitteddate?.ToString("yyyy-MM-dd")</td>
+                                            <td>
+
+                                                <form asp-controller="Admin" asp-action="ApprovalTest" method="post" style="display:inline;">
+                                                    <input type="hidden" name="id" value="@item.Test.Testimonialid" />
+                                                    <button type="submit" class="btn btn-inverse-success">
+                                                        <i class="fa fa-thumb-tack"></i> Approve
+                                                    </button>
+                                                </form>
+                                                @* <a type="button" class="btn btn-inverse-success "><i class="fa fa-thumb-tack" >pen</i></a> *@
+                                              
+                                                <form asp-controller="Admin" asp-action="DeleteTest" method="post" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                                    <input type="hidden" name="id" value="@item.Test.Testimonialid" />
+                                                    <button type="submit" class="btn btn-inverse-danger">
+                                                        <i class="fa fa-trash-o"></i> Delete
+                                                    </button>
+                                                </form>
+
+                                             </td>
+                            </tr>
+        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Approved testimonials</h4>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+
+                                        <th>Profile Picture</th>
+                                        <th>Full Name</th>
+                                        <th>Testimonial</th>
+                                        <th>Rating</th>
+                                        <th>Date</th>
+                                        <th>  pen   </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Where(t => t.Test.Status == "Approved"))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <img src="@item.Userinfo.Profilepicture" alt="Profile Picture" class="me-2" />
+                                            </td>
+                                            <td>@item.Userinfo.Fullname</td>
+                                            
+                                            <td>@item.Test.Content</td>
+                                            <td>@item.Test.Rating</td>
+                                            <td>@item.Test.Submitteddate?.ToString("yyyy-MM-dd")</td>
+                                            <td>
+
+                                                <a type="button" asp-controller="Admin" asp-action="Delete" class="btn btn-inverse-danger"><i class="fa fa-trash-o"> delete</i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
