@@ -1,8 +1,8 @@
 # YooGA
 
-# Fitness Center Management System
+# YooGA Center Management System
 
-The **Fitness Center Management System** is a comprehensive web application designed to streamline the operations of a fitness center, including managing memberships, workout plans, trainer schedules, and administrative reporting. Built using **ASP.NET MVC** and **Oracle Database**, the system aims to enhance the experience for both members and administrators.
+The **YooGA Center Management System** is a comprehensive web application designed to streamline the operations of a yoga center, including managing memberships, workout plans, trainer schedules, and administrative reporting. Built using **ASP.NET MVC** and **Oracle Database**, the system aims to enhance the experience for both members and administrators.
 
 ## Features
 
@@ -27,7 +27,7 @@ The **Fitness Center Management System** is a comprehensive web application desi
 - **Profile Management**: Update trainer details.
 
 ### Guest Features
-- **Browse Information**: View details about the fitness center without registering.
+- **Browse Information**: View details about the Yoga center without registering.
 
 ## Technologies Used
 - **Programming Language**: C# with ASP.NET MVC
@@ -39,8 +39,3 @@ The **Fitness Center Management System** is a comprehensive web application desi
 - **Operating System**: Windows 10 or later
 - **Development Tools**: Visual Studio 2022, SQL Developer
 - **Database**: Oracle Server
-
-## Installation Guide
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/fitness-center-management.git
