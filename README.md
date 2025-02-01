@@ -41,6 +41,6 @@ The **YooGA Center Management System** is a comprehensive web application design
 - **Database**: Oracle Server
 ## Video Advertisement
 
-Check out this video advertisement to see the highlights of our Fitness Center Management System in action!
+Check out this video advertisement to see the highlights of My YooGA Center Management System in action!
 
 [Click here to watch the video](https://drive.google.com/file/d/1b7Zf8G-MyWNTETe4Vo7TyyQyjYHc9APa/view?usp=sharing)
