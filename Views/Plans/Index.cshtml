@@ -1,13 +1,28 @@
 ﻿@model IEnumerable<yogago.Models.Plan>
 
 @{
-    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
 }
 
-<h1>Index</h1>
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <div class="row">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-primary text-white me-2">
+                        <i class="badge badge-gradient-warning"></i>
+                    </span> Plans
+                </h3>
+            </div>
+        </div>
+
+        <section style="background-color: #f2edf3;">
+            <div class="container py-5">
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-conroller="Plans" asp-action="Create">Create New Plan</a>
 </p>
 <table class="table">
     <thead>
@@ -31,17 +46,23 @@
                 @Html.DisplayFor(modelItem => item.Planname)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Durationmonths)
+                @Html.DisplayFor(modelItem => item.Durationmonths) Month
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                $ @Html.DisplayFor(modelItem => item.Price) 
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Planid">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Planid">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Planid">Delete</a>
+                <a asp-conroller="Plans" asp-action="Edit" asp-route-id="@item.Planid">Edit</a> |
+                <a asp-conroller="Plans" asp-action="Details" asp-route-id="@item.Planid">Details</a> |
+                <a asp-conroller="Plans" asp-action="Delete" asp-route-id="@item.Planid">Delete</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+
+
+<hr />
+

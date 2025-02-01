@@ -33,6 +33,10 @@ namespace yogago.Controllers
                 return RedirectToAction("Login", "Login");
             }
             ViewBag.Username = username;
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
+
             var modelContext = _context.Userinfos.Include(u => u.Role).Where(u => u.Roleid == 3); 
             return View(await modelContext.ToListAsync());
         }
@@ -105,6 +109,19 @@ namespace yogago.Controllers
 
                 _context.Add(userinfo);
                 await _context.SaveChangesAsync();
+
+
+                var member = new Member
+                {
+                    Userid = userinfo.Userid,
+                    Joindate = DateTime.Now
+                };
+
+                _context.Members.Add(member);
+                _context.SaveChanges();
+
+
+
                 return RedirectToAction(nameof(Index));
             }
 

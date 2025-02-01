@@ -1,0 +1,66 @@
+﻿@* @{
+    Layout = "~/Views/Shared/_Home.cshtml";
+
+}
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Invoice</h2>
+            </div>
+            <div class="col-12">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Home" asp-action="Invoice">Invoice</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Class Start -->
+<div class="class">
+    <div class="container">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+
+            <h2>Invoice</h2>
+            <p>All transactions are secure and encrypted.</p>
+        </div>
+        
+        <div>
+            <h3>Invoice Preview</h3>
+            <p> Username : @ViewBag.Username</p>
+            <p>Plan: @ViewBag.PlanName</p>
+            <p>Amount: $@ViewBag.Amount</p>
+            <form asp-controller="Home" asp-action="ConfirmPurchase" method="post">
+                <input type="hidden" name="PlanId" value="@ViewBag.PlanId" />
+                <button type="submit" class="btn btn-success">Confirm Purchase</button>
+            </form>
+            <a href="@Url.Action("Payment", "Home", new { planId = ViewBag.PlanId })" class="btn btn-secondary">Go Back</a>
+
+        </div>
+    </div>
+</div>
+
+ *@
+
+
+
+@{
+    var plan = ViewBag.Plan as yogago.Models.Plan;
+    var paymentInfo = ViewBag.PaymentInfo as yogago.Models.Paymentinfo;
+    var balance = ViewBag.Balance as int?;
+}
+
+<div>
+    <h2>Invoice</h2>
+    <p>Plan: @plan.Planname</p>
+    <p>Price: $@plan.Price</p>
+    <p>Cardholder: @paymentInfo.Fullname</p>
+    <p>Balance: $@balance</p>
+    <form asp-action="ConfirmPurchase" asp-controller="Home" method="post">
+        <input type="hidden" name="PlanId" value="@plan.Planid" />
+        <input type="hidden" name="CardId" value="@paymentInfo.Cardid" />
+        <button type="submit" class="btn btn-success">Confirm Purchase</button>
+    </form>
+
+
+</div>

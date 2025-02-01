@@ -1,0 +1,273 @@
+﻿@inject IHttpContextAccessor HttpContextAccessor
+
+@model IEnumerable<yogago.Models.Class>
+
+
+@{
+    Layout = "~/Views/Shared/_Home.cshtml";
+}
+
+<!-- Page Header Start -->
+<div class="page-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <h2>Trainer-Classes</h2>
+            </div>
+            <div class="col-12">
+                <a asp-controller="Home" asp-action="Index">Home</a>
+                <a asp-controller="Home" asp-action="TClass">Trainer-Classes</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<div class="class">
+    <div class="container">
+        <div class="section-header text-center wow zoomIn" data-wow-delay="0.1s">
+            <p>Our Classes</p>
+            <h2>@ViewBag.TrainerName's Yoga Classes   </h2>
+        </div>
+
+
+
+           
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-flex justify-content-center flex-wrap">
+                                <a asp-action="TClass"
+                                   asp-route-trainerid="@ViewBag.TrainerId"
+                                   asp-route-trainername="@ViewBag.TrainerName"
+                                   asp-route-categoryId="0"
+                                   class="btn  mx-1 @(ViewBag.SelectedCategory == null || ViewBag.SelectedCategory == 0 ? "active" : "")">
+                                    All Classes
+                                </a>
+                                @foreach (var category in ViewBag.Categories as List<yogago.Models.Classcategory>)
+                                {
+                                    <a asp-action="TClass"
+                                       asp-route-trainerid="@ViewBag.TrainerId"
+                                       asp-route-trainername="@ViewBag.TrainerName"
+                                       asp-route-categoryId="@category.Categoryid"
+                                       class="btn  mx-1 @(ViewBag.SelectedCategory == category.Categoryid ? "active" : "")">
+                                        @category.Categoryname
+                                    </a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row class-container mt-4">
+                @foreach (var cls in Model)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-@cls.Categoryid" data-wow-delay="0.1s">
+                        <div class="class-wrap">
+                            <div class="class-img">
+                                @if (!string.IsNullOrEmpty(cls.Imgcover))
+                                {
+@*                                     <img src="@Url.Content($"~/images/{cls.Imgcover}")" alt="Class Cover" width="100%" />
+                        *@                              <img src="@cls.Imgcover" alt="Class Cover" width="100%" />
+                                
+                                }
+                                else
+                                {
+                                    <span>No Image</span>
+                                }
+                            </div>
+                            <div class="class-text">
+                                <div class="class-teacher">
+@*                                     <img src="@Url.Content($"~/images/{cls.Trainer.User.Profilepicture}")" alt="Image" class="rounded-circle" width="50">
+ *@
+                                <img src="@cls.Trainer.User.Profilepicture" alt="Image" class="rounded-circle" width="50">
+
+ <h3>@cls.Trainer?.User?.Fullname</h3>
+                                    @* <a asp-action="Addclass" asp-controller="Home" asp-route-classid="@cls.Classid" asp-routr-trinerid="@cls.Trainerid">+</a> *@
+@* 
+                                    <form asp-action="Addclass" asp-controller="Home" method="post">
+                                        <input type="hidden" name="classid" value="@cls.Classid" />
+                                    @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
+                                    {
+                                        <button type="submit" class="btn btn-primary">+</button>
+                                    } </form>
+ *@
+    @* just to keep post behaver L7ta akhed al + style *@
+                                <a href="javascript:void(0);"
+                                   onclick="document.getElementById('addClassForm-@cls.Classid').submit();"
+                                   class="btn btn-primary">
+                                    +
+                                </a>
+
+                                <form id="addClassForm-@cls.Classid" asp-action="Addclass" asp-controller="Home" method="post">
+                                    <input type="hidden" name="classid" value="@cls.Classid" />
+                                </form>
+                                    @* we use the form bec we use the post methid  *@
+
+                                </div>
+                                <h2>@cls.Classname</h2>
+                            <h4>@cls.Category.Categoryname</h4>
+
+                                <div class="class-meta">
+                                    <p><i class="far fa-calendar-alt"></i> @cls.Classdays</p>
+                                    <p><i class="far fa-clock"></i> @cls.Classtime</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+      
+
+
+
+
+
+            @section Scripts {
+                <script>
+                    // Check for a success message and show an alert
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <text>
+                                alert("@TempData["SuccessMessage"]");
+                        </text>
+                    }
+
+                        // Check for an error message and show an alert
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <text>
+                                alert("@TempData["ErrorMessage"]");
+                        </text>
+                    }
+
+
+
+                            $(document).ready(function () {
+                                // Handle filter clicks
+                                $("#class-filter ").on("click", function () {
+                                    var filter = $(this).data("filter");
+                                    $(".class-item").hide(); // Hide all items
+
+                                    if (filter === "*") {
+                                        $(".class-item").show(); // Show all items
+                                    } else {
+                                        $(filter).show(); // Show filtered items
+                                    }
+
+                                    // Highlight the active filter
+                                    $("#class-filter").removeClass("filter-active");
+                                    $(this).addClass("filter-active");
+                                });
+                        });
+                </script>
+
+               
+            }
+
+            <style>
+                .btn.active {
+                    background-color: #343148;
+                    color: white;
+                }
+            </style>
+
+            @* <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-2 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="class-wrap">
+                    <div class="class-img">
+                        <img src="~/HomeAssets/img/class-2.jpg" alt="Image">
+                    </div>
+                    <div class="class-text">
+                        <div class="class-teacher">
+                            <img src="~/HomeAssets/img/teacher-2.png" alt="Image">
+                            <h3>Kate Glover</h3>
+                            <a href="">+</a>
+                        </div>
+                        <h2>Iyengar Yoga</h2>
+                        <div class="class-meta">
+                            <p><i class="far fa-calendar-alt"></i>Sun, Tue, Thu</p>
+                            <p><i class="far fa-clock"></i>9:00 - 10:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-3 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="class-wrap">
+                    <div class="class-img">
+                        <img src="~/HomeAssets/img/class-3.jpg" alt="Image">
+                    </div>
+                    <div class="class-text">
+                        <div class="class-teacher">
+                            <img src="~/HomeAssets/img/teacher-3.png" alt="Image">
+                            <h3>Elina Ekman</h3>
+                            <a href="">+</a>
+                        </div>
+                        <h2>Ashtanga yoga</h2>
+                        <div class="class-meta">
+                            <p><i class="far fa-calendar-alt"></i>Sun, Tue, Thu</p>
+                            <p><i class="far fa-clock"></i>9:00 - 10:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-1 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="class-wrap">
+                    <div class="class-img">
+                        <img src="~/HomeAssets/img/class-4.jpg" alt="Image">
+                    </div>
+                    <div class="class-text">
+                        <div class="class-teacher">
+                            <img src="~/HomeAssets/img/teacher-4.png" alt="Image">
+                            <h3>Lilly Fry</h3>
+                            <a href="">+</a>
+                        </div>
+                        <h2>Hatha Yoga</h2>
+                        <div class="class-meta">
+                            <p><i class="far fa-calendar-alt"></i>Sun, Tue, Thu</p>
+                            <p><i class="far fa-clock"></i>9:00 - 10:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-2 wow fadeInUp" data-wow-delay="0.8s">
+                <div class="class-wrap">
+                    <div class="class-img">
+                        <img src="~/HomeAssets/img/class-5.jpg" alt="Image">
+                    </div>
+                    <div class="class-text">
+                        <div class="class-teacher">
+                            <img src="~/HomeAssets/img/teacher-5.png" alt="Image">
+                            <h3>Olivia Yates</h3>
+                            <a href="">+</a>
+                        </div>
+                        <h2>Kundalini Yoga</h2>
+                        <div class="class-meta">
+                            <p><i class="far fa-calendar-alt"></i>Sun, Tue, Thu</p>
+                            <p><i class="far fa-clock"></i>9:00 - 10:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12 class-item filter-3 wow fadeInUp" data-wow-delay="1s">
+                <div class="class-wrap">
+                    <div class="class-img">
+                        <img src="~/HomeAssets/img/class-6.jpg" alt="Image">
+                    </div>
+                    <div class="class-text">
+                        <div class="class-teacher">
+                            <img src="~/HomeAssets/img/teacher-6.png" alt="Image">
+                            <h3>Millie Harper</h3>
+                            <a href="">+</a>
+                        </div>
+                        <h2>Vinyasa yoga</h2>
+                        <div class="class-meta">
+                            <p><i class="far fa-calendar-alt"></i>Sun, Tue, Thu</p>
+                            <p><i class="far fa-clock"></i>9:00 - 10:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> *@

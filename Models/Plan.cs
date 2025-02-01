@@ -9,7 +9,7 @@ public partial class Plan
 
     public string Planname { get; set; } = null!;
 
-    public decimal Durationmonths { get; set; }
+    public int Durationmonths { get; set; }
 
     public decimal Price { get; set; }
 

@@ -1,12 +1,15 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<yogago.Models.Trainer>
+
 @{
     Layout = "~/Views/Shared/_Home.cshtml";
 
 }
 
+@* @model IEnumerable<yogago.Models.Trainer> *@
 
+@{
+    ViewData["Title"] = "Trainers";
+}
 
 <!-- Page Header Start -->
 <div class="page-header">
@@ -31,24 +34,40 @@
             <h2>Expert Yoga Trainer</h2>
         </div>
         <div class="row">
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.0s">
-                <div class="team-item">
-                    <div class="team-img">
-                        <img src="~/HomeAssets/img/team-1.jpg" alt="Image">
-                        <div class="team-social">
-                            <a href=""><i class="fab fa-twitter"></i></a>
-                            <a href=""><i class="fab fa-facebook-f"></i></a>
-                            <a href=""><i class="fab fa-linkedin-in"></i></a>
-                            <a href=""><i class="fab fa-instagram"></i></a>
+            @foreach (var trainer in Model)
+            {
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="team-item">
+                        <div class="team-img">
+                            @if (!string.IsNullOrEmpty(trainer.User?.Profilepicture))
+                            {
+                                <img src="@trainer.User.Profilepicture" alt="Profile Picture" width="100" height="100" />
+                            }
+                            else
+                            {
+                                <img src="@Url.Content("~/images/default-profile.png")" alt="Default Profile Picture" width="100" height="100" />
+                            }
+                            <div class="team-social">
+                                <a href=""><i class="fab fa-twitter"></i></a>
+                                <a href=""><i class="fab fa-facebook-f"></i></a>
+                                <a href=""><i class="fab fa-linkedin-in"></i></a>
+                                <a href=""><i class="fab fa-instagram"></i></a>
+                            </div>
+                        </div>
+                        <div class="team-text">
+                            <!-- Link to send Trainerid to TClass -->
+                            <a asp-controller="Home" asp-action="TClass" asp-route-Trainerid="@trainer.Trainerid" asp-route-trainername="@trainer.User?.Fullname">
+                                <h2>@trainer.User?.Fullname</h2>
+                            </a>
+                            <p>@trainer.Specialization</p>
+                            <p>@trainer.Experience Years Experience</p>
                         </div>
                     </div>
-                    <div class="team-text">
-                        <h2>Millie Harper</h2>
-                        <p>Yoga Teacher</p>
-                    </div>
                 </div>
-            </div>
-            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
+            }
+        </div>
+
+            @* <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.2s">
                 <div class="team-item">
                     <div class="team-img">
                         <img src="~/HomeAssets/img/team-2.jpg" alt="Image">
@@ -166,7 +185,7 @@
                         <p>Yoga Teacher</p>
                     </div>
                 </div>
-            </div>
+            </div> *@
         </div>
     </div>
 </div>

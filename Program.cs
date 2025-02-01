@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using yogago.Models;
+using yogago.Services;
 
 namespace yogago
 {
@@ -22,7 +23,11 @@ namespace yogago
 			{
 				options.IdleTimeout = TimeSpan.FromMinutes(30);
 			});
-			var app = builder.Build();
+
+            builder.Services.AddSingleton<EmailService>();
+
+
+            var app = builder.Build();
 
 
             // Configure the HTTP request pipeline.

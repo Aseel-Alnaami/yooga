@@ -13,7 +13,7 @@ public partial class Invoiceinfo
 
     public DateTime? Generateddate { get; set; }
 
-    public string? Emailsent { get; set; }
+    public bool Emailsent { get; set; } = false;
 
     public virtual Memberplan? Memberplan { get; set; }
 }

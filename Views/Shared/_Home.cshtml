@@ -1,5 +1,12 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor
 
+@{
+
+    var address = ViewBag.Address;
+    var phoneNumber = ViewBag.PhoneNumber;
+    var email = ViewBag.Email;
+}
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -42,7 +49,9 @@
                         </div>
                         <div class="text">
                             <i class="fa fa-phone-alt"></i>
-                            <h2>+692 7883 18984</h2>
+                            <h2>
+                                @phoneNumber?.Content
+                            </h2>
                             <p>For Appointment</p>
                         </div>
                     </div>
@@ -74,7 +83,6 @@
                 <div class="navbar-nav ml-auto">
                     <a asp-controller="Home" asp-action="Index" class="nav-item nav-link active">Home</a>
                     <a  asp-controller="Home" asp-action="about" class="nav-item nav-link">About</a>
-                    <a href="service.html" class="nav-item nav-link">Service</a>
                     <a asp-controller="Home" asp-action="price" class="nav-item nav-link">Price</a>
                     <a asp-controller="Home" asp-action="classs" class="nav-item nav-link">Class</a>
                     <a asp-controller="Home" asp-action="Trainers" class="nav-item nav-link">Trainer</a>
@@ -86,7 +94,7 @@
                     <a  asp-controller="Home" asp-action="Contact" class="nav-item nav-link">Contact</a>
                     @if (HttpContextAccessor.HttpContext.Session.GetString("Username") != null)
                     {
-                        <a asp-controller="Home" asp-action="Logout" class="btn ">Logout</a>
+                        <a asp-controller="Home" asp-action="Logout" class="btn nav-link">   Logout</a>
 
                     }
 
@@ -108,10 +116,16 @@
                     <img src="~/HomeAssets/img/LOGO.png" alt="LOGO" width="9%" height="9%" />
 
                     <a href="index.html" class="footer-logo">Y<span>oo</span>ga</a>
-                    <h3>11821 Mecca St. Amman, Jordan</h3>
+                    <h3>
+                        @address?.Content
+                    </h3>
                     <div class="footer-menu">
-                        <p>+692 7883 18984</p>
-                        <p>YooGACenter@gmail.com</p>
+                        <p>
+                            @phoneNumber?.Content
+                        </p>
+                        <p>
+                            @email?.Content
+                        </p>
                     </div>
                     <div class="footer-social">
                         <a href=""><i class="fab fa-twitter"></i></a>
@@ -153,5 +167,7 @@
 
     <!-- Template Javascript -->
     <script src="~/HomeAssets/js/main.js"></script>
+    @RenderSection("Scripts", required: false)
+
 </body>
 </html>

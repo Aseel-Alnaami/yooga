@@ -31,15 +31,15 @@
     @* <link rel="shortcut icon" href="~/AdminAssets/assets/images/favicon.png" /> *@
 </head>
 <body>
-    <div class="container-scroller">
-        <div class="container-fluid page-body-wrapper full-page-wrapper">
-            <div class="content-wrapper d-flex align-items-center auth">
+    <div class="container-scroller container">
+        <div class="container-fluid page-body-wrapper full-page-wrapper" style=" background-color: #f5c2c12e;">
+            <div class="content-wrapper d-flex align-items-center auth" style=" background-color: #f5c2c12e;">
                 <div class="row flex-grow">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left p-5">
-                            <div class="brand-logo">
-                                <img src="~/AdminAssets/assets/images/favicon.png">
-                            </div>
+                           <center><div class="brand-logo">
+                                <img src="~/AdminAssets/LOGOpink.png">
+                            </div></center>
                             <h4>New here?</h4>
                             <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
                             <form asp-action="Signup"  method="post" enctype="multipart/form-data">
@@ -71,17 +71,17 @@
                                     <input asp-for="Password" class="form-control" placeholder="Password" type="password" />
                                     <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
-                                <div class="form-group">
+                            
 
+                                
                                     <div class="form-group">
-                                        @* <label asp-for="Profilepicturefile" class="control-label"></label> *@
-                                        <input asp-for="Profilepicturefile" type="file" class="form-control" />
-                                        <span asp-validation-for="Profilepicturefile" class="text-danger"></span>
+                                        <label asp-for="Profilepicturefile" class="control-label"></label>
+                                    <input name="Profilepicturefile" type="file" class="form-control" />
+                                        @* <span asp-validation-for="Profilepicturefile" class="text-danger"></span> *@
                                     </div>
-                                    @* <label>Profile Picture</label>
-                                    <input asp-for="Profilepicturefile" class="form-control" type="file" /> *@
-                                </div>
-                                <button type="submit" class="btn btn-primary">Sign Up</button>
+                                
+                           
+                                <button type="submit" class="btn btn-primary" style=" background-color: #ec9ca6;">Sign Up</button>
                             </form>
 
                         </div>
@@ -113,3 +113,9 @@
         <!-- End custom js for this page -->
 </body>
 </html>
+<style>
+
+    .container {
+        background-color: #f5c2c12e;
+    }
+</style>

@@ -26,7 +26,9 @@ namespace yogago.Controllers
                 return RedirectToAction("Login", "Login");
             }
             ViewBag.Username = username;
+            var profileimg = HttpContext.Session.GetString("Profileimg");
 
+            ViewBag.img = profileimg;
 
             return View();
         }
@@ -45,7 +47,9 @@ namespace yogago.Controllers
             {
                 return RedirectToAction("Login", "Login");
             }
+            var profileimg = HttpContext.Session.GetString("Profileimg");
 
+            ViewBag.img = profileimg;
             ViewBag.Username = username;
 
             var Trainerinfo = await _context.Userinfos
@@ -63,10 +67,45 @@ namespace yogago.Controllers
 
         public IActionResult TClasses()
         {
+            var username = HttpContext.Session.GetString("Username");
+            var Userid = HttpContext.Session.GetInt32("Userid");
+            var Rolename = HttpContext.Session.GetString("Rolename");
+            var Roleid = HttpContext.Session.GetInt32("Roleid");
+
+
+            if (string.IsNullOrEmpty(username) || Userid == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            ViewBag.Username = username;
+            ViewBag.Rolename = Rolename;
+            ViewBag.Userid = Userid;
+
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
+
             return View();
         }
         public IActionResult Traineeslist()
         {
+            var username = HttpContext.Session.GetString("Username");
+            var Userid = HttpContext.Session.GetInt32("Userid");
+            var Rolename = HttpContext.Session.GetString("Rolename");
+            var Roleid = HttpContext.Session.GetInt32("Roleid");
+
+
+            if (string.IsNullOrEmpty(username) || Userid == null)
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            ViewBag.Username = username;
+            ViewBag.Rolename = Rolename;
+            ViewBag.Userid = Userid;
+
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
             return View();
         }
     }

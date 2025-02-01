@@ -18,16 +18,53 @@ namespace yogago.Controllers
             _context = context;
         }
 
+            //var username = HttpContext.Session.GetString("Username");
+            //var Userid = HttpContext.Session.GetInt32("Userid");
+            //var Rolename = HttpContext.Session.GetString("Rolename");
+            //var Roleid = HttpContext.Session.GetInt32("Roleid");
+
+
+            //if (string.IsNullOrEmpty(username))
+            //{
+            //    return RedirectToAction("Login", "Login");
+            //}
+            //ViewBag.Username = username;
         // GET: Plans
         public async Task<IActionResult> Index()
         {
-              return _context.Plans != null ? 
-                          View(await _context.Plans.ToListAsync()) :
-                          Problem("Entity set 'ModelContext.Plans'  is null.");
+            var username = HttpContext.Session.GetString("Username");
+            var Userid = HttpContext.Session.GetInt32("Userid");
+            var Rolename = HttpContext.Session.GetString("Rolename");
+            var Roleid = HttpContext.Session.GetInt32("Roleid");
+
+
+            if (string.IsNullOrEmpty(username))
+            {
+                return RedirectToAction("Login", "Login");
+            }
+            ViewBag.Username = username;
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
+            if (_context.Plans == null)
+            {
+                return Problem("Entity set 'ModelContext.Plans' is null.");
+            }
+            var planinfo = await _context.Plans.ToListAsync();
+
+
+
+
+
+            return View(planinfo); // withot view the palninfo is null
+
         }
 
-        // GET: Plans/Details/5
-        public async Task<IActionResult> Details(decimal? id)
+        
+
+
+            // GET: Plans/Details/5
+            public async Task<IActionResult> Details(decimal? id)
         {
             if (id == null || _context.Plans == null)
             {

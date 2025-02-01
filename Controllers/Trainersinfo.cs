@@ -36,6 +36,9 @@ namespace yogago.Controllers
                 return RedirectToAction("Login", "Login");
             }
             ViewBag.Username = username;
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
 
             var modelContext = _context.Userinfos.Include(u => u.Role).Where(u => u.Roleid == 2);
             return View(await modelContext.ToListAsync());

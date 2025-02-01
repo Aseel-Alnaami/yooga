@@ -36,11 +36,20 @@ namespace yogago.Controllers
             // Retrieve Trainerid (Userid) from session
             var trainerid = HttpContext.Session.GetInt32("Userid");
 
-            if (trainerid == null)
+            var username = HttpContext.Session.GetString("Username");
+            var Userid = HttpContext.Session.GetInt32("Userid");
+            var Rolename = HttpContext.Session.GetString("Rolename");
+            var Roleid = HttpContext.Session.GetInt32("Roleid");
+
+
+            if (string.IsNullOrEmpty(username))
             {
-                // If the session is not set, redirect to the login page
                 return RedirectToAction("Login", "Login");
             }
+            ViewBag.Username = username;
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
 
             // Filter data for the logged-in trainer
             var modelContext = _context.Classes
@@ -70,6 +79,8 @@ namespace yogago.Controllers
             return View(@class);
         }
 
+
+  
         // GET: ClassesT/Create
         public IActionResult Create()
         {
@@ -80,6 +91,10 @@ namespace yogago.Controllers
             }
 
             ViewBag.Trainerid = trainerid;
+
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
 
             ViewData["Categoryid"] = new SelectList(
                     _context.Classcategories.OrderBy(c => c.Categoryname),
@@ -98,7 +113,10 @@ namespace yogago.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Classid,Classname,Classdays,Classtime,Imgcover,Categoryid")] Class @class, IFormFile imgFile)
         {
-            // Retrieve Trainerid from session
+
+            var profileimg = HttpContext.Session.GetString("Profileimg");
+
+            ViewBag.img = profileimg;
             var trainerid = HttpContext.Session.GetInt32("Userid");
             if (trainerid == null)
             {
@@ -116,7 +134,7 @@ namespace yogago.Controllers
                 {
                     string wwwrootPath = _webHostEnvironment.WebRootPath; // Get the path to wwwroot
                     string fileName = Guid.NewGuid().ToString() + Path.GetExtension(imgFile.FileName); // Unique file name
-                    string uploadPath = Path.Combine(wwwrootPath, "classcover"); // Target folder for uploads
+                    string uploadPath = Path.Combine(wwwrootPath, "image"); // Target folder for uploads
 
                     if (!Directory.Exists(uploadPath))
                     {
@@ -132,7 +150,7 @@ namespace yogago.Controllers
                     }
 
                     // Save the relative path to the database
-                    @class.Imgcover = Path.Combine("classcover", fileName).Replace("\\", "/");
+                    @class.Imgcover = Path.Combine("image", fileName).Replace("\\", "/");
                 }
 
                 // Add the class to the database

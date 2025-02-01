@@ -1,0 +1,96 @@
+﻿@model IEnumerable<yogago.Models.contactview>
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+
+
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <div class="row">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-primary text-white me-2">
+                        <i class="badge badge-gradient-warning"></i>
+                    </span> Emailes
+
+                    @if (TempData["SuccessMessage"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["SuccessMessage"]</div>
+                    }
+
+                    @if (TempData["ErrorMessage"] != null)
+                    {
+                        <div class="alert alert-danger">@TempData["ErrorMessage"]</div>
+                    }
+
+                </h3>
+            </div>
+        </div>
+
+
+
+    <div class="row">
+        <div class="col-12 grid-margin">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Recent Testamoneal</h4>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                                <tr>
+
+                                    
+                                    <th>Full Name</th>
+                                    <th>Email</th>
+                                    <th>Subject</th>
+                                    <th>Message</th>
+									<th>  Date   </th>
+                                        <th> Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        
+                                        <td>@item.Contact.Name</td>
+                                          
+                                        <td>@item.Contact.Email</td>
+                                        <td>@item.Contact.Subject</td>
+                                        <td>@item.Contact.Message</td>
+                            
+                                        <td>@item.Contact.Submitteddate?.ToString("yyyy-MM-dd")</td>
+                                        <td>
+                                                @* <form asp-controller="Admin" asp-action="ContactAsync" method="post" style="display:inline;">
+                                                <input type="hidden" name="id" value="@item.Contactid" />
+                                                    <textarea name="response" class="form-control" placeholder="Message" required="required"></textarea>
+                                                    <span asp-validation-for="response" class="text-danger"></span>
+                                         
+                                                <button type="submit" class="btn btn-inverse-success">
+                                                    <i class="fa fa-thumb-tack"></i> Send
+                                                </button>
+                                            </form>
+                                            *@
+                                                <form asp-controller="Admin" asp-action="Contact" method="post">
+                <input type="hidden" name="contactId" value="@item.Contact.Contactid" />
+                                                    <textarea name="Response" class="form-control" placeholder="Enter your response" required></textarea>
+                                                    <span asp-validation-for="@item.Response" class="text-danger"></span>
+
+                                                    <button type="submit" class="btn btn-outline-primary btn-sm ">Send</button>
+               
+            </form>
+
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>

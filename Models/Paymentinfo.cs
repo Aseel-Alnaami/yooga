@@ -19,11 +19,12 @@ public partial class Paymentinfo
 
     public string Cvvencrypted { get; set; } = null!;
 
-    public byte Expirymonth { get; set; }
+    public int Expirymonth { get; set; }
 
-    public byte Expiryyear { get; set; }
+    public int Expiryyear { get; set; }
 
     public DateTime? Createddate { get; set; }
 
     public virtual Member? Member { get; set; }
 }
+//public int Balance { get; set; }

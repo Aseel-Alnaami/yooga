@@ -27,59 +27,6 @@ namespace yogago.Controllers
 
 
 
-
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Login(Userlogin userlogin)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        ModelState.AddModelError("", "Invalid input.");
-        //        return View(userlogin);
-        //    }
-
-        //    // Retrieve user from the database
-        //    var user = await _context.Userlogins
-        //        .Where(x => x.Username == userlogin.Username)
-        //        .SingleOrDefaultAsync();
-
-        //    if (user != null)
-        //    {
-        //        // Verify password (if using plain text for now)
-        //        if (user.Password != userlogin.Password)
-        //        {
-        //            ModelState.AddModelError("", "Invalid password.");
-        //            return View(userlogin);
-        //        }
-
-        //        // Store user info in session
-        //        HttpContext.Session.SetInt32("Userid", (int)user.Userid);
-        //        HttpContext.Session.SetString("Username", user.Username);
-        //        HttpContext.Session.SetString("Password", user.Password);
-        //        HttpContext.Session.SetInt32("Roleid", (int)user.Roleid);
-
-        //        // Redirect based on role
-        //        switch (user.Roleid)
-        //        {
-        //            case 1: // Admin
-        //                return RedirectToAction("Index", "Admin");
-
-        //            case 2: // Trainer
-        //                return RedirectToAction("Index", "Trainer");
-
-        //            case 3: // Customer
-        //                return RedirectToAction("Index", "Home");
-
-        //            default:
-        //                ModelState.AddModelError("", "Unauthorized access.");
-        //                return View(userlogin);
-        //        }
-        //    }
-
-        //    // Handle invalid login
-        //    ModelState.AddModelError("", "Invalid username or password.");
-        //    return View(userlogin);
-        //}
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(Loginview loginModel)
@@ -104,10 +51,11 @@ namespace yogago.Controllers
                 HttpContext.Session.SetInt32("Userid", (int)user.Userid);
                 HttpContext.Session.SetString("Username", user.Username);
                 HttpContext.Session.SetInt32("Roleid", (int)user.Roleid);
+                HttpContext.Session.SetString("Profileimg", user.Profilepicture);
 
                 return user.Roleid switch
                 {
-                    1 => RedirectToAction("Index", "Admin"),
+                    1 => RedirectToAction("Subsecrebtions", "Admin"),
                     2 => RedirectToAction("Index", "Trainer"),
                     3 => RedirectToAction("Index", "Home"),
                     _ => Unauthorized()
@@ -134,7 +82,7 @@ namespace yogago.Controllers
 
 
         [HttpPost]
-        public IActionResult Signup(Class2 class2)
+        public async Task<IActionResult>  Signup(Class2 class2)
         {
             // Check if username already exists
             var existingUser = _context.Userlogins.SingleOrDefault(x => x.Username == class2.Username);
@@ -162,15 +110,25 @@ namespace yogago.Controllers
 
                 if (class2.Profilepicturefile != null)
                 {
-                    // Save Profile Picture (Example: Save to "wwwroot/uploads")
-                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image");
-                    string uniqueFileName = Guid.NewGuid().ToString() + "_" + class2.Profilepicturefile.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    // Ensure the directory exists
+                    string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/image/");
+                    if (!Directory.Exists(directoryPath))
                     {
-                        class2.Profilepicturefile.CopyTo(fileStream);
+                        Directory.CreateDirectory(directoryPath);
                     }
-                    userInfo.Profilepicture = uniqueFileName; // Store filename in DB
+
+                    // Generate file name and full path
+                    string fileName = Path.GetFileName(class2.Profilepicturefile.FileName);
+                    string filePath = Path.Combine(directoryPath, fileName);
+
+                    // Save the file in the directory
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await class2.Profilepicturefile.CopyToAsync(stream);
+                    }
+
+                    // Save the path including 'wwwroot' to the database
+                    userInfo.Profilepicture = Path.Combine("/image/", fileName);
                 }
 
                 _context.Userinfos.Add(userInfo);

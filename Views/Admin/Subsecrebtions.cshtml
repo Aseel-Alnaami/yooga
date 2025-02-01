@@ -1,0 +1,507 @@
+﻿@model IEnumerable<yogago.Models.Subsecrebtions>
+
+@{
+    Layout = "~/Views/Shared/_Admin.cshtml";
+
+}
+<link href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+		integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+		crossorigin="anonymous"
+		referrerpolicy="no-referrer"></script>
+<script src="html2pdf.bundle.min.js"></script>
+
+<div class="main-panel" style=" background:#f2edf3;">
+    <div class="content-wrapper">
+        <div class="page-header">
+
+			
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                    <i class="mdi mdi-home"></i>
+                </span>   Welcome,
+                @ViewBag.Username!
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">
+                        <span></span>Overview <i class="mdi mdi-alert-circle-outline icon-sm text-primary align-middle"></i>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+        <div class="row">
+            <div class="col-md-3 stretch-card grid-margin">
+                <div class="card bg-gradient-danger card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/AdminAssets/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Trainers <i class="mdi mdi-chart-line mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.TrainersSUM</h2>
+                        <h6 class="card-text">   </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 stretch-card grid-margin">
+                <div class="card bg-gradient-info card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/AdminAssets/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Members <i class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.MembersSUM</h2>
+                        <h6 class="card-text">      </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/AdminAssets/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Plans <i class="mdi mdi-diamond mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.PlansSUM</h2>
+                        <h6 class="card-text">        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 stretch-card grid-margin">
+                <div class="card bg-gradient-success card-img-holder text-white">
+                    <div class="card-body">
+                        <img src="~/AdminAssets/assets/images/dashboard/circle.svg" class="card-img-absolute" alt="circle-image" />
+                        <h4 class="font-weight-normal mb-3">
+                            Classes <i class="mdi mdi-diamond mdi-24px float-end"></i>
+                        </h4>
+                        <h2 class="mb-5">@ViewBag.ClassesSUM</h2>
+                        <h6 class="card-text">        </h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+            <div class="row">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-primary text-white me-2">
+                        <i class="badge badge-gradient-warning"></i>
+                    </span> Subsecrebtions
+                </h3>
+            </div>
+       
+
+
+        <div class="row">
+            <div class="col-12 grid-margin">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Recent Testamoneal</h4>
+
+						<button id="download-button" class="btn btn-primary mt-3 mb-4"> PDF</button>
+						
+<div style="width: 300px; height: 150px; margin: auto; ">
+    <canvas id="planUsageChart"></canvas>
+</div>
+
+						<form action="Subsecrebtions" method="post">
+
+							<input type="date" class="form-control" name="startDate"placeholder="Start Date">
+							<input type="date" class="form-control" name="endDate"  placeholder="End Date">
+
+							<button type="submit" class="btn btn-dark">Search</button>
+
+						</form>
+
+
+						<div id="invoice">
+							<div class="table-responsive">
+								<table class="table" id="example">
+									<thead>
+										<tr>
+
+											<th>Profile Picture</th>
+											<th>Full Name</th>
+											<th>Plan Name</th>
+											<th>Price</th>
+											<th>Start Date</th>
+											@*  <th>  pen   </th> *@
+
+
+										</tr>
+									</thead>
+									<tbody>
+										@foreach (var item in Model)
+										{
+											<tr>
+												<td>
+													<img src="@item.Userinfo.Profilepicture" alt="Profile Picture" class="me-2" />
+												</td>
+												<td>@item.Userinfo.Fullname</td>
+												<td>
+												</td>
+												<td>@item.Plan.Planname</td>
+												<td>$@item.Plan.Price</td>
+												<td>@item.Memberplan.Startdate?.ToString("yyyy-MM-dd")</td>
+
+											</tr>
+										}
+									</tbody>
+								</table>
+							</div>
+
+						</div>
+						
+                    </div>
+                </div>
+            </div>
+		</div>
+	</div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+@* 
+<div style="width: 600px; margin: auto;">
+        <canvas id="planUsageChart"></canvas>
+    @* </div> *@ 
+   
+
+            <!-- html2pdf CDN link -->
+
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="crossorigin="anonymous"referrerpolicy="no-referrer"></script>
+@* 
+
+            <br></br>
+        
+            <div class="main-panel"id="invoice" >
+                <div class="content-wrapper">
+                    <div class="page-header">
+                        <div class="row">
+                            <h3 class="page-title">
+                                <span class="page-title-icon bg-gradient-primary text-white me-2">
+                                    <i class="badge badge-gradient-warning"></i>
+                                </span> Subsecrebtions
+                            </h3>
+                        </div>
+                    </div>
+
+            <div class="row mb-3">
+                <div class="col">
+                    <h4 class="text-muted">Recent Subscriptions</h4>
+                    <button id="download-button" class="btn btn-primary mt-3 mb-4"> PDF</button>
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <div class="table-responsive">
+                        <table id="example" class="table table-bordered" style="border: 1px solid #ddd; font-size: 14px;">
+                            <thead class="bg-gradient-primary text-white" style="background-color: #2a7bdb;">
+                                <tr>
+                                    <th>Profile Picture</th>
+                                    <th>Full Name</th>
+                                    <th>Plan Name</th>
+                                    <th>Price</th>
+                                    <th>Start Date</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>
+                                            <img src="@item.Userinfo.Profilepicture" alt="Profile Picture" class="rounded-circle" style="width: 50px; height: 50px; object-fit: cover;" />
+                                        </td>
+                                        <td class="align-middle">@item.Userinfo.Fullname</td>
+                                        <td class="align-middle">@item.Plan.Planname</td>
+                                        <td class="align-middle text-success"><strong>$@item.Plan.Price</strong></td>
+                                        <td class="align-middle">@item.Memberplan.Startdate?.ToString("yyyy-MM-dd")</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+       
+            </div</div></div>
+
+            <script>
+                const button = document.getElementById('download-button');
+
+                function generatePDF() {
+                    // Choose the element that your content will be rendered to.
+                    const element = document.getElementById('invoice');
+                    // Choose the element and save the PDF for your user.
+                    html2pdf().from(element).save();
+                }
+
+                button.addEventListener('click', generatePDF);
+            </script>*@
+
+@* 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.72/pdfmake.min.js"
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer"></script>
+        <!--vfs_fonts.js is essential for embedding fonts into PDF documents created with pdfmake-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.72/vfs_fonts.js"
+                crossorigin="anonymous"
+                referrerpolicy="no-referrer"></script> *@
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+
+<script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js" defer></script>
+
+<script src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js" defer></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+
+<script src="https://cdn.datatables.net/buttons/2.0.0/js/buttons.html5.min.js" defer></script>
+
+<script>
+	
+		const button = document.getElementById('download-button');
+
+		function generatePDF() {
+					// Choose the element that your content will be rendered to.
+					const element = document.getElementById('invoice');
+		// Choose the element and save the PDF for your user.
+		html2pdf().from(element).save();
+				}
+
+		button.addEventListener('click', generatePDF);
+
+
+
+		$(document).ready(function () {
+
+			$('#example').DataTable({
+
+				dom: 'Bfrtip',
+
+				buttons: [
+
+					'copyHtml5',
+
+					'excelHtml5',
+
+					'csvHtml5',
+
+					'pdfHtml5'
+
+				]
+
+			}); });
+ const labels = @Html.Raw(Json.Serialize(ViewBag.Y));
+    const data = @Html.Raw(Json.Serialize(ViewBag.X));
+
+    const ctx = document.getElementById('planUsageChart').getContext('2d');
+    const planUsageChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Members',
+                data: data,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+
+
+
+@* 		<script>
+			const button = document.getElementById('download-button');
+
+			function generatePDF() {
+				const docDefinition = {
+					content: [
+						{
+							columns: [
+								{
+									text: '&',
+									style: 'logo',
+								},
+								{
+									stack: [
+										{ text: 'Company', style: 'companyName' },
+										{
+											text: '[COMPANY INFO]',
+											style: 'companyInfo',
+										},
+									],
+									alignment: 'right',
+								},
+							],
+							margin: [0, 20, 0, 30],
+						},
+						{
+							canvas: [
+								{
+									type: 'line',
+									x1: 0,
+									y1: 5,
+									x2: 515,
+									y2: 5,
+									lineWidth: 2.5,
+									lineColor: 'black',
+								},
+							],
+							margin: [0, 10, 0, 20],
+						},
+						{
+							columns: [
+								{
+									text: [
+										{
+											text: 'Billed To:\n',
+											style: 'billedToLabel',
+										},
+										{
+											text: 'Company Ltd.\n',
+											style: 'billedTo',
+										},
+										{
+											text:
+												'Address\nCountry\nVAT ID: ATU12345678\n',
+											style: 'billedTo',
+										},
+									],
+									width: '60%',
+								},
+								{
+									text: [
+										{
+											text: 'Invoice #\n',
+											style: 'invoiceLabel',
+										},
+										{
+											text: '123456\n',
+											style: 'invoiceNumber',
+										},
+										{
+											text: 'Payment Date:\n',
+											style: 'invoiceLabel',
+										},
+										{
+											text: 'November 22nd 2021\n',
+											style: 'invoiceDate',
+										},
+										{
+											text: 'Payment Method:\n',
+											style: 'invoiceLabel',
+										},
+										{
+											text: 'Bank Transfer',
+											style: 'paymentMethod',
+										},
+									],
+									alignment: 'right',
+									width: '40%',
+								},
+							],
+							margin: [0, 10, 0, 20],
+						},
+						{
+							style: 'itemsTable',
+							table: {
+								widths: ['*', 75, 100, 100],
+								headerRows: 1,
+								body: [
+									[
+										{
+											text: 'Description',
+											style: 'tableHeader',
+										},
+										{ text: 'QTY', style: 'tableHeader' },
+										{
+											text: 'Unit Price',
+											style: 'tableHeader',
+										},
+										{ text: 'Total', style: 'tableHeader' },
+									],
+									['Product 1', '2', '$10.00', '$20.00'],
+									['Product 2', '5', '$15.00', '$75.00'],
+									['Product 3', '1', '$25.00', '$25.00'],
+									[
+										{
+											text: 'Total',
+											colSpan: 3,
+											alignment: 'right',
+											style: 'totalLabel',
+										},
+										{},
+										{},
+										'$120.00',
+									],
+								],
+							},
+							layout: 'lightHorizontalLines',
+						},
+					],
+					styles: {
+						logo: { fontSize: 30, bold: true, color: '#4736e7' },
+						companyName: {
+							fontSize: 16,
+							bold: true,
+							color: '#333333',
+						},
+						companyInfo: { fontSize: 10, color: '#555555' },
+						billedToLabel: {
+							bold: true,
+							fontSize: 12,
+							color: '#333333',
+						},
+						billedTo: {
+							fontSize: 10,
+							color: '#555555',
+							lineHeight: 1.5,
+						},
+						invoiceLabel: {
+							fontSize: 10,
+							bold: true,
+							color: '#333333',
+						},
+						invoiceNumber: { fontSize: 10, color: '#555555' },
+						invoiceDate: { fontSize: 10, color: '#555555' },
+						paymentMethod: { fontSize: 10, color: '#555555' },
+						tableHeader: {
+							bold: true,
+							fontSize: 10,
+							color: 'black',
+						},
+						totalLabel: { bold: true, fontSize: 10 },
+					},
+					defaultStyle: {
+						columnGap: 20,
+					},
+				};
+
+				pdfMake
+					.createPdf(docDefinition)
+					.download('styled-invoice.pdf');
+			}
+
+			button.addEventListener('click', generatePDF);
+		</script>
+		
+ *@

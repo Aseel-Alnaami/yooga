@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Classid" />
             <div class="form-group">
@@ -28,10 +28,28 @@
                 <input asp-for="Classtime" class="form-control" />
                 <span asp-validation-for="Classtime" class="text-danger"></span>
             </div>
-            <div class="form-group">
+          @*   <div class="form-group">
                 <label asp-for="Imgcover" class="control-label"></label>
                 <input asp-for="Imgcover" class="form-control" />
                 <span asp-validation-for="Imgcover" class="text-danger"></span>
+            </div>
+ *@
+            <div class="form-group">
+                <label>Current Profile Picture</label>
+                @if (!string.IsNullOrEmpty(Model.Imgcover))
+                {
+                    <img src="@Model.Imgcover" alt="Profile picture of" style="width: 100px; height: 100px; object-fit: cover;" />
+                }
+                else
+                {
+                    <span>No Image Uploaded</span>
+                }
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Imgcoverfile" class="control-label"></label>
+                <input asp-for="Imgcoverfile" type="file" class="form-control" />
+                <span asp-validation-for="Imgcoverfile" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Categoryid" class="control-label"></label>

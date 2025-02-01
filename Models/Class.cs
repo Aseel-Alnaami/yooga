@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace yogago.Models;
 
@@ -13,7 +14,10 @@ public partial class Class
 
     public DateTime Classtime { get; set; }
 
-    public string? Imgcover { get; set; } 
+    [NotMapped]
+    public virtual IFormFile? Imgcoverfile { get; set; }// For file upload
+
+    public string? Imgcover { get; set; }
 
     public decimal? Categoryid { get; set; }
 
@@ -24,4 +28,7 @@ public partial class Class
     public virtual ICollection<Classmember> Classmembers { get; set; } = new List<Classmember>();
 
     public virtual Trainer? Trainer { get; set; }
+
+
+
 }

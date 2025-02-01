@@ -1,4 +1,4 @@
-﻿
+﻿@model yogago.Models.Paymentinfo
 @{
     Layout = "~/Views/Shared/_Home.cshtml";
 
@@ -25,80 +25,73 @@
             <h2>Payment</h2>
             <p>All transactions are secure and encrypted.</p>
         </div>
+        <div class="containerr">
+
         <div class="row">
-            
-                <div class="containerr">
-                    <form action="">
-                        <div class="row">
-                            <div class="column">
-                                <h3 class="title">Billing Address</h3>
-                                <div class="input-box">
-                                    <span>Full Name :</span>
-                                    <input type="text" placeholder="Jacob Aiden">
-                                </div>
-                                <div class="input-box">
-                                    <span>Email :</span>
-                                    <input type="email" placeholder="example@example.com">
-                                </div>
-                                <div class="input-box">
-                                    <span>Address :</span>
-                                    <input type="text" placeholder="Room - Street - Locality">
-                                </div>
-                                <div class="input-box">
-                                    <span>City :</span>
-                                    <input type="text" placeholder="Berlin">
-                                </div>
+            @{
+                var plan = ViewBag.Plan as yogago.Models.Plan;
+            }
 
-                                <div class="flex">
-                                    <div class="input-box">
-                                        <span>State :</span>
-                                        <input type="text" placeholder="Germany">
-                                    </div>
-                                    <div class="input-box">
-                                        <span>Zip Code :</span>
-                                        <input type="number" placeholder="123 456">
-                                    </div>
-                                </div>
+            <h2>Payment</h2>
+            <br />            <p>Price: $@plan.Price</p>
+            <p>Plan: @plan.Planname</p>
+<br />            <p>Price: $@plan.Price</p>
+            <br />            <p>Price: $@plan.Price</p>
+                <form asp-action="Payment" asp-controller="Home" method="post">
+    <input type="hidden" name="PlanId" value="@ViewBag.Plan.Planid" />
+
+                    <div class="row">
+                        <!-- Billing Address Fields -->
+                        <div class="column">
+                            <h3 class="title">Billing Address</h3>
+                            <div class="input-box">
+                                <span>Full Name :</span>
+                                <input type="text" name="Fullname" placeholder="Jacob Aiden" required>
                             </div>
-
-                            <div class="column">
-                                <h3 class="title">Payment</h3>
-                                <div class="input-box">
-                                    <span>Cards Accepted :</span>
-                                    <img src="imgcards.png" alt="">
-                                </div>
-                                <div class="input-box">
-                                    <span>Name On Card :</span>
-                                    <input type="text" placeholder="Mr. Jacob Aiden">
-                                </div>
-                                <div class="input-box">
-                                    <span>Credit Card Number :</span>
-                                    <input type="number" placeholder="1111 2222 3333 4444">
-                                </div>
-                                <div class="input-box">
-                                    <span>Exp. Month :</span>
-                                    <input type="text" placeholder="August">
-                                </div>
-
-                                <div class="flex">
-                                    <div class="input-box">
-                                        <span>Exp. Year :</span>
-                                        <input type="number" placeholder="2025">
-                                    </div>
-                                    <div class="input-box">
-                                        <span>CVV :</span>
-                                        <input type="number" placeholder="123">
-                                    </div>
-                                </div>
+                            <div class="input-box">
+                                <span>Email :</span>
+                                <input type="email" name="Email" placeholder="example@example.com" required>
+                            </div>
+                            <div class="input-box">
+                                <span>Zip Code :</span>
+                                <input type="text" name="Zipcode" placeholder="123 456" required>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn">Submit</button>
-                    </form>
-           
+                        <!-- Payment Fields -->
+                        <div class="column">
+                            <h3 class="title">Payment</h3>
+                            <div class="input-box">
+                                <span>Credit Card Number :</span>
+                                <input type="text" name="Cardnumberencrypted" placeholder="1111 2222 3333 4444" required>
+                            </div>
+                            <div class="input-box">
+                                <span>CVV :</span>
+                                <input type="text" name="Cvvencrypted" placeholder="123" required>
+                            </div>
+                            <div class="flex">
+                                <div class="input-box">
+                                    <span>Exp. Month :</span>
+                                    <input type="number" name="Expirymonth" placeholder="8" required>
+                                </div>
+                                <div class="input-box">
+                                    <span>Exp. Year :</span>
+                                    <input type="number" name="Expiryyear" placeholder="2025" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Submit</button>
+                </form>
+
+
 	</div>
      </div>
-     </div>       
+     </div>
+
+
+   
 
     <style>
 

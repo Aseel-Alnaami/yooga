@@ -1,0 +1,214 @@
+﻿@model IEnumerable<yogago.Models.Homemanagementtext>
+
+@{
+    Layout = null;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>  YOOGA </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="~/HomeAssets/favicon.ico/LOGOpink.png">
+
+    <link href="~/HomeAssets/img/favicon.ico" rel="icon">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- CSS Libraries -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="~/HomeAssets/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/HomeAssets/lib/flaticon/font/flaticon.css" rel="stylesheet">
+    <link href="~/HomeAssets/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/HomeAssets/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="~/HomeAssets/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Top Bar Start -->
+    <div class="top-bar d-none d-md-block">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="top-bar-left">
+                        <div class="text">
+                            <i class="far fa-clock"></i>
+                            <h2>8:00 - 9:00</h2>
+                            <p>Sun - Fri</p>
+                        </div>
+                        <div class="text">
+                            <i class="fa fa-phone-alt"></i>
+                            <h2>+692 7883 18984</h2>
+                            <p>For Appointment</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="top-bar-right">
+                        <div class="social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Top Bar End -->
+    <!-- Nav Bar Start -->
+    <div class="navbar navbar-expand-lg bg-dark navbar-dark">
+        <div class="container-fluid">
+            <img src="~/HomeAssets/img/LOGO.png" alt="LOGO" width="9%" height="9%" />
+            <a href="index.html" class="navbar-brand">Y<span>oo</span>ga </a>
+            <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                <div class="navbar-nav ml-auto">
+                 
+                   
+                    
+                       
+                    
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Nav Bar End -->
+    <main role="main" class="pb-3">
+
+<!-- Hero Start -->
+<div class="hero">
+    <div class="container-fluid">
+        <div class="row align-items-center">
+            <div class="col-sm-12 col-md-6">
+                <div class="hero-text">
+                    <h1>Yoga Practice For Good Health</h1>
+                    <p>
+                        Yoga is a holistic practice that strengthens the body, calms the mind, and promotes inner peace. It enhances flexibility, reduces stress, and supports overall well-being.
+
+
+
+
+
+
+
+                    </p>
+                    <div class="hero-btn">
+                        
+                            <a class="btn" >Join Now</a>
+                        
+                        <a class="btn" >Contact Us</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 d-none d-md-block">
+                <div class="hero-image">
+                    <img src="~/HomeAssets/img/hero.png" alt="Hero Image">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+<!-- About Start -->
+<div class="about wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-5 col-md-6">
+                <div class="about-img">
+                    <img src="~/HomeAssets/img/about.png" alt="Image">
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-6">
+                <div class="section-header text-left">
+                    <p>Learn About Us</p>
+                            <h2>Welcome to @ViewBag.Centername Center</h2>  
+                            <a asp-action="Edit" asp-controller="Homemanagementtexts" asp-route-id="1">Edit</a> |
+                </div>
+                <div class="about-text">
+                    <p>
+                        Welcome to YooGA Center, your ultimate destination for physical and mental well-being. Founded in 2021 by Aseel Alnaami, YooGA Center is built on the passion for promoting health, mindfulness, and harmony in life. With a team of highly skilled trainers, we are committed to guiding you on your journey to a healthier and more balanced lifestyle.
+
+
+                    </p>
+                    <p>
+                        At YooGA Center, we believe in the transformative power of yoga. Yoga not only strengthens your body but also nurtures your mind and soul. It helps reduce stress, improves flexibility, enhances focus, and fosters inner peace. Our mission is to help you experience these life-changing benefits and empower you to live a more fulfilled and joyful life.
+
+                        Join us today and discover the true essence of yoga at YooGA Center!
+                    </p>
+                    
+                        <a class="btn" >Join now</a>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="footer wow fadeIn" data-wow-delay="0.3s">
+            <div class="container-fluid">
+                <div class="container">
+                    <div class="footer-info">
+                        <img src="~/HomeAssets/img/LOGO.png" alt="LOGO" width="9%" height="9%" />
+
+                        <a href="index.html" class="footer-logo">Y<span>oo</span>ga</a>
+                        <h3>11821 Mecca St. Amman, Jordan</h3>
+                        <div class="footer-menu">
+                            <p>+692 7883 18984</p>
+                            <p>YooGACenter@gmail.com</p>
+                        </div>
+                        <div class="footer-social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-youtube"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-linkedin-in"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="container copyright">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p>&copy; <a href="#">YooGA</a>, All Right Reserved.</p>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+
+        <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
+
+        <!-- JavaScript Libraries -->
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+        <script src="~/HomeAssets/lib/easing/easing.min.js"></script>
+        <script src="~/HomeAssets/lib/wow/wow.min.js"></script>
+        <script src="~/HomeAssets/lib/owlcarousel/owl.carousel.min.js"></script>
+        <script src="~/HomeAssets/lib/isotope/isotope.pkgd.min.js"></script>
+        <script src="~/HomeAssets/lib/lightbox/js/lightbox.min.js"></script>
+
+        <!-- Contact Javascript File -->
+        <script src="~/HomeAssets/mail/jqBootstrapValidation.min.js"></script>
+        <script src="~/HomeAssets/mail/contact.js"></script>
+
+        <!-- Template Javascript -->
+        <script src="~/HomeAssets/js/main.js"></script>
+@*          @RenderSection("Scripts", required: false)
+ *@
+</body>
+</html>
