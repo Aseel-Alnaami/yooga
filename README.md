@@ -1,4 +1,4 @@
-# YooGA
+
 
 # YooGA Center Management System
 
