@@ -39,3 +39,16 @@ The **YooGA Center Management System** is a comprehensive web application design
 - **Operating System**: Windows 10 or later
 - **Development Tools**: Visual Studio 2022, SQL Developer
 - **Database**: Oracle Server
+
+## Video Advertisement
+
+<video width="640" height="360" controls>
+  <source src="wwwroot/AdminAssets/Yooga with voice.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+## Video Advertisement
+
+Check out this video advertisement to see the highlights of our Fitness Center Management System in action!
+
+[Watch the video](wwwroot/AdminAssets/Yooga with voice.mp4)
