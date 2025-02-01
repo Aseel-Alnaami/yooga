@@ -33,7 +33,7 @@ namespace yogago.Controllers
 
             //desplay test
             //Userinfo ,member,testamoneal ==>LINQ
-
+//sisstion**********
             var userinfo = _context.Userinfos.ToList();
             var test = _context.Testimonials.ToList();
             var member = _context.Members.ToList();
